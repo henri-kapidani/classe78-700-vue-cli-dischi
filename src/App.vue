@@ -1,30 +1,39 @@
 <template>
   <div>
-    <PageMain :arr-movies="movies" />
+    <PageHeader
+      :genres-list="genresList"
+      @changedGenre="genreChange"
+    />
+    <PageMain
+      :genre-filter="genreFilter"
+      @genresReady="getGenresList"
+    />
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import PageHeader from '@/components/PageHeader.vue';
 import PageMain from '@/components/PageMain.vue';
 
 export default {
   name: 'App',
   components: {
+    PageHeader,
     PageMain,
   },
   data() {
     return {
-      urlApi: 'https://flynn.boolean.careers/exercises/api/array/music',
-      movies: null,
+      genresList: [],
+      genreFilter: 'all',
     };
   },
-  created() {
-    axios.get(this.urlApi)
-      .then((axiosResponse) => {
-        console.log(axiosResponse);
-        this.movies = axiosResponse.data.response;
-      });
+  methods: {
+    getGenresList(genresList) {
+      this.genresList = genresList;
+    },
+    genreChange(genreFilter) {
+      this.genreFilter = genreFilter;
+    },
   },
 };
 </script>

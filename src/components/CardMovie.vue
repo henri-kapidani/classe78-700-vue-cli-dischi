@@ -18,5 +18,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  ul {
+    margin: 1rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+  }
 </style>
